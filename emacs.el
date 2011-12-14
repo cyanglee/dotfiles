@@ -3,7 +3,7 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-blackboard)))
+     (color-theme-tangotango)))
 
 (setq inhibit-startup-screen t)
 ; set font family and size
@@ -42,8 +42,7 @@
 ;(global-srecode-minor-mode 1)            ; Enable template insertion menu
 
 ;ecb
-;(add-to-list 'load-path 
-;             "~/.emacs.d/ecb-2.40")
+;(add-to-list 'load-path "~/.emacs.d/ecb-2.40")
 ;(require 'ecb)
 
 ;;default folder
@@ -63,4 +62,12 @@
 
 ;; Add F12 to toggle line wrap
 (global-set-key [f6] 'toggle-truncate-lines)
+
+;; save the clock history across Emacs sessions
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+;; emacs-rails-reload
+(setq load-path (cons (expand-file-name "~/.emacs.d/emacs-rails-reloaded") load-path))
+  (require 'rails-autoload)
 

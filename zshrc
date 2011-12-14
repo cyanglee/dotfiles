@@ -34,6 +34,8 @@ export PATH=/Users/kenneth/.rvm/gems/ruby-1.9.3-head@global/bin:/Users/kenneth/.
 # Customize to your needs...
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 
+export VIM_APP_DIR=/usr/local/Cellar/macvim/7.3-57
+
 [[ -s "/Users/kenneth/.rvm/scripts/rvm" ]] && source "/Users/kenneth/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
 # turn off auto correct
@@ -47,8 +49,22 @@ alias h='history'
 
 # ruby / rails
 alias rs='rails s'
+# alias rs='unicorn_rails -p 3000'
 alias rr='rake routes'
 alias rc='rails c'
 alias reset_db='rake db:drop;rake db:create;rake db:migrate;rake db:seed;'
+alias p='powder'
+alias hk='heroku'
+alias rake="noglob rake"
+
+# mysql
+alias mysql='/usr/local/mysql/bin/mysql'
+alias mysqldump='/usr/local/mysql/bin/mysqldump'
 
 export HISTFILESIZE=30000
+
+# ssh
+alias tunnel_andover='ssh -N -f -L 3307:localhost:3306 andover'
+
+# mongodb
+alias start_mongo='mongod run --config /usr/local/Cellar/mongodb/2.0.0-x86_64/mongod.conf'
