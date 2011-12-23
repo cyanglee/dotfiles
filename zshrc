@@ -24,7 +24,7 @@ ZSH_THEME="sorin"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git brew bundler heroku rails3 redis-cli powder git-flow cyanglee rvm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -48,13 +48,10 @@ alias grep='grep --color=auto'
 alias h='history'
 
 # ruby / rails
-alias rs='rails s'
 # alias rs='unicorn_rails -p 3000'
 alias rr='rake routes'
-alias rc='rails c'
 alias reset_db='rake db:drop;rake db:create;rake db:migrate;rake db:seed;'
 alias p='powder'
-alias hk='heroku'
 alias rake="noglob rake"
 
 # mysql
