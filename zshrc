@@ -85,3 +85,12 @@ listkinf ()
 {
     find . -type f -exec grep -n "$1" {} \;
 }
+
+git_pull_r()
+{
+  for i in `find . -type d -maxdepth 1`; do
+    cd $i;
+    git pull;
+    cd ..
+  done
+}
