@@ -24,19 +24,13 @@ ZSH_THEME="sorin"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew bundler heroku rails3 redis-cli powder git-flow cyanglee rvm)
+plugins=(git brew bundler heroku rails3 redis-cli powder git-flow cyanglee rvm autojump rbenv) 
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/Users/kenneth/.rvm/gems/ruby-1.9.3-head@global/bin:/Users/kenneth/.rvm/gems/ruby-1.9.3-head@global/bin:/Users/kenneth/.rvm/rubies/ruby-1.9.3-head/bin:/Users/kenneth/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
-
-# Customize to your needs...
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 
-export VIM_APP_DIR=/usr/local/Cellar/macvim/7.3-57
-
-[[ -s "/Users/kenneth/.rvm/scripts/rvm" ]] && source "/Users/kenneth/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
 # turn off auto correct
 unsetopt correct_all
@@ -63,5 +57,31 @@ export HISTFILESIZE=30000
 # ssh
 alias tunnel_andover='ssh -N -f -L 3307:localhost:3306 andover'
 
-# mongodb
-alias start_mongo='mongod run --config /usr/local/Cellar/mongodb/2.0.0-x86_64/mongod.conf'
+# misc
+alias ctags="`brew --prefix`/bin/ctags"
+# alias find_content='find . -name "*.*" -print | xargs grep '
+
+# rbenv
+eval "$(rbenv init -)"
+
+# custom functions
+search ()
+{
+    if [ $# -ne 1 ]; then
+        echo "please specify the file name to search";
+        exit 0;
+    else
+        # echo "Matching file found: --> ";
+        find . -name "$1" | awk '{print "Matching file found: --> " $1}'
+    fi
+}
+
+findkinf ()
+{
+    find . -type f -exec grep -l "$1" {} \;
+}
+
+listkinf ()
+{
+    find . -type f -exec grep -n "$1" {} \;
+}
