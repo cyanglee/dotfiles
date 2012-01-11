@@ -6,6 +6,8 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="sorin"
+# ZSH_THEME="robbyrussell"
+# ZSH_THEME="gnzh"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -59,7 +61,6 @@ alias tunnel_andover='ssh -N -f -L 3307:localhost:3306 andover'
 
 # misc
 alias ctags="`brew --prefix`/bin/ctags"
-# alias find_content='find . -name "*.*" -print | xargs grep '
 
 # rbenv
 eval "$(rbenv init -)"
@@ -84,13 +85,4 @@ findkinf ()
 listkinf ()
 {
     find . -type f -exec grep -n "$1" {} \;
-}
-
-git_pull_r()
-{
-  for i in `find . -type d -maxdepth 1`; do
-    cd $i;
-    git pull;
-    cd ..
-  done
 }
