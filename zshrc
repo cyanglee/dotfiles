@@ -33,6 +33,8 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 
+# color tmux
+alias tmux="TERM=screen-256color-bce tmux"
 
 # turn off auto correct
 unsetopt correct_all
