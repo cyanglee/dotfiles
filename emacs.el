@@ -35,39 +35,9 @@
 ;; tag position
 (setq org-tags-column 120)
 
-;cedet - project management
-;(load-file "~/.emacs.d/cedet-1.0pre7/common/cedet.el")
-;(global-ede-mode 1)                      ; Enable the Project management system
-;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
-;(global-srecode-minor-mode 1)            ; Enable template insertion menu
-
-;ecb
-;(add-to-list 'load-path "~/.emacs.d/ecb-2.40")
-;(require 'ecb)
-
 ;;default folder
 (cd "~/Dropbox/todo")
 
 (setq split-height-threshold 40) ; nil
-(setq split-width-threshold nil) ; 100
-
-;; See http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_620.html
-;; and http://www.gnu.org/software/emacs/manual/elisp.pdf
-
-;; disable line wrap
-(setq default-truncate-lines t)
-
-;; make side by side buffers function the same as the main window
-(setq truncate-partial-width-windows nil)
-
-;; Add F12 to toggle line wrap
-(global-set-key [f6] 'toggle-truncate-lines)
-
-;; save the clock history across Emacs sessions
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
-
-;; emacs-rails-reload
-(setq load-path (cons (expand-file-name "~/.emacs.d/emacs-rails-reloaded") load-path))
-  (require 'rails-autoload)
+(setq split-width-threshold 120) ; 100
 
