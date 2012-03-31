@@ -42,6 +42,9 @@ alias f='fasd -f' # file
 alias z='fasd_cd -d' # cd, same functionality as j in autojump
 alias v='f -e vim' # quick opening files with vim
 
+# rbenv
+alias re="rbenv"
+
 # custom functions
 search ()
 {

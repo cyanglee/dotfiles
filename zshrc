@@ -56,7 +56,7 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 unsetopt correct_all
 
 # Set history size
-export HISTFILESIZE=10000
+export HISTFILESIZE=1000
 # Sync history file
 export PROMPT_COMMAND='history -a'
 
