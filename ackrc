@@ -1,0 +1,11 @@
+# cool
+--color
+
+# handy
+--sort-files
+
+# don't need to quote this
+# no reset, fast exit, support colour, supress line numbers
+--pager=less --no-init --no-lessopen --quiet --quit-if-one-screen --RAW-CONTROL-CHARS --line-numbers
+
+# --type-set=web=.css,.html,.js,.php

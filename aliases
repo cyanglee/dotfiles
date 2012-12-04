@@ -1,6 +1,6 @@
 # colored highlighting is awesome
-alias ls='gls -Fh --color=auto'
-alias ll='gls -alFh --color=auto'
+#alias ls='gls -Fh --color=auto'
+#alias ll='gls -alFh --color=auto'
 alias grep='grep --color=auto'
 alias h='history'
 alias l=''
@@ -8,14 +8,19 @@ alias l=''
 # ruby / rails
 # alias rs='unicorn_rails -p 3000'
 alias rr='rake routes'
-alias rails='_rails_command'
+# alias rails='_rails_command'
 alias reset_db='rake db:drop;rake db:create;rake db:migrate;rake db:seed;'
 alias p='powder'
 alias rake="noglob rake"
+alias s='rails s'
 
 # mysql
 alias mysql='/usr/local/mysql/bin/mysql'
 alias mysqldump='/usr/local/mysql/bin/mysqldump'
+
+# editor
+alias st='subl'
+alias v='vi'
 
 # ssh
 alias tunnel_andover='ssh -N -f -L 3307:localhost:3306 andover'
@@ -27,6 +32,9 @@ alias ta="tmux -C attach"
 alias diff='colordiff -yW"`tput cols`"'
 # colored less
 alias less='/usr/share/vim/vim73/macros/less.sh'
+# edit zsh.before/after file
+alias za='vi ~/repo/dotfiles/after.zsh'
+alias zb='vi ~/repo/dotfiles/before.zsh'
 
 # check the svn ignore list
 alias svn_ignore='svn status | grep "^\?" | awk "{print \$2}"'

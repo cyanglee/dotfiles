@@ -12,8 +12,8 @@
 
 
 # Automatically cd to frequently used directories http://robots.thoughtbot.com/post/10849086566/cding-to-frequently-used-directories-in-zsh
-setopt auto_cd
-cdpath=($HOME/Dropbox/code)
+#setopt auto_cd
+#cdpath=($HOME/Dropbox/code)
 
 # Fancy globbing http://linuxshellaccount.blogspot.com/2008/07/fancy-globbing-with-zsh-on-linux-and.html
 setopt extendedglob
@@ -33,19 +33,43 @@ setopt auto_pushd
 # turn off auto correct
 unsetopt correct_all
 
-# Set history size
-export HISTFILESIZE=1000
+# Set history options
+HISTSIZE=1000
+HISTFILESIZE=1000
+HISTTIMEFORMAT='%F %T '
 # Sync history file
 export PROMPT_COMMAND='history -a'
 
 # rbenv
-eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
 
 # java home
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
 
 # export PATH
-export PATH=/Users/kenneth/git-repo/dotfiles/:$PATH
+export PATH=/Users/cyanglee/git-repo/dotfiles:$PATH
+export PATH=/Users/cyanglee/bin:$PATH
+
+# Maven
+export M2_HOME=/usr/share/maven
+export PATH=$M2_HOME/bin:$PATH
+export MAVEN_OPTS="-Xms512m -Xmx1024m"
+
+# initiate a python web server in the current directory
+function server() {
+  local port="${1:-8000}"
+  open "http://localhost:${port}/"
+  python -m SimpleHTTPServer "$port"
+}
+
+# autojump
+# [[ -f `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
+# add bin path created by 'bundle install --binstubs' for rails projects
+export PATH=./bin:$PATH
 
 # source my alias file
-. ~/git-repo/dotfiles/aliases
+. ~/repo/dotfiles/aliases
+
+echo "sourced my zsh custom file"

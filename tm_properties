@@ -1,0 +1,8 @@
+# Settings
+tabSize         = 2
+softTabs        = true
+fontSize        = 20
+fontName        = "Consolas"
+excludeInFileChooser = "{$excludeInFileChooser,log,vendor/bundle,tmp}"
+excludeInBrowser = "{$excludeInBrowser,log,vendor/bundle,tmp}"
+excludeInFolderSearch = "{$excludeInFolderSearch,log,vendor/bundle,tmp}"
