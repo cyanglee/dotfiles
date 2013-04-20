@@ -1,8 +1,9 @@
 # Settings
 tabSize         = 2
 softTabs        = true
-fontSize        = 20
-fontName        = "Consolas"
+fontSize        = 24
+fontName        = "Source Code Pro"
 excludeInFileChooser = "{$excludeInFileChooser,log,vendor/bundle,tmp}"
 excludeInBrowser = "{$excludeInBrowser,log,vendor/bundle,tmp}"
 excludeInFolderSearch = "{$excludeInFolderSearch,log,vendor/bundle,tmp}"
+TM_STRIP_WHITESPACE_ON_SAVE = true

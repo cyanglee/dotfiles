@@ -64,8 +64,9 @@
   /**********************************************/
 
   #-webkit-web-inspector #console-messages {
-    font-size: 1.5em;
-    font-family: 'DroidSansMono', Menlo, monospace !important;
+    /*font-size: 1.7em;*/
+    font-size: 16px;
+    font-family: 'Source Code Pro', 'DroidSansMono', Menlo, monospace !important;
     background: #1C1E21;
   }
 
@@ -176,7 +177,7 @@
   #-webkit-web-inspector #elements-content,
   #-webkit-web-inspector .resource-view.json {
     background: #1C1E21 !important;
-    font-size: 12px !important;
+    font-size: 16px !important;
   }
 
   #-webkit-web-inspector .highlight {

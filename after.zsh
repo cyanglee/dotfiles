@@ -40,10 +40,6 @@ HISTTIMEFORMAT='%F %T '
 # Sync history file
 export PROMPT_COMMAND='history -a'
 
-# rbenv
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
-
 # java home
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
 
@@ -63,13 +59,20 @@ function server() {
   python -m SimpleHTTPServer "$port"
 }
 
-# autojump
-# [[ -f `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
 # add bin path created by 'bundle install --binstubs' for rails projects
 export PATH=./bin:$PATH
-
+# go path
+export GOPATH=~/workspace/go
 # source my alias file
 . ~/repo/dotfiles/aliases
+
+# hub
+# eval "$(hub alias -s)"
+
+# torquebox
+export TORQUEBOX_HOME=~/torquebox-2.3.0
+export JBOSS_HOME=$TORQUEBOX_HOME/jboss
+export JRUBY_HOME=$TORQUEBOX_HOME/jruby
+export PATH=$PATH:$JRUBY_HOME/bin
 
 echo "sourced my zsh custom file"

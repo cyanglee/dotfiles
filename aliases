@@ -13,10 +13,17 @@ alias reset_db='rake db:drop;rake db:create;rake db:migrate;rake db:seed;'
 alias p='powder'
 alias rake="noglob rake"
 alias s='rails s'
+alias bd='bundle'
+alias be='bundle exec'
+alias rdr='rake db:rollback'
+alias zu='zeus'
 
 # mysql
 alias mysql='/usr/local/mysql/bin/mysql'
 alias mysqldump='/usr/local/mysql/bin/mysqldump'
+
+# postgresql
+# pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 
 # editor
 alias st='subl'
@@ -28,6 +35,10 @@ alias tunnel_andover='ssh -N -f -L 3307:localhost:3306 andover'
 # misc
 alias ctags="`brew --prefix`/bin/ctags"
 alias ta="tmux -C attach"
+alias skype="sudo /Applications/Skype.app/Contents/MacOS/Skype"
+alias zal="v ~/repo/dotfiles/aliases"
+alias tb="torquebox"
+
 # colored side-by-side diff
 alias diff='colordiff -yW"`tput cols`"'
 # colored less
@@ -35,15 +46,23 @@ alias less='/usr/share/vim/vim73/macros/less.sh'
 # edit zsh.before/after file
 alias za='vi ~/repo/dotfiles/after.zsh'
 alias zb='vi ~/repo/dotfiles/before.zsh'
+alias zaa='vi ~/repo/dotfiles/aliases' 
 
 # check the svn ignore list
 alias svn_ignore='svn status | grep "^\?" | awk "{print \$2}"'
 
 # git
 alias git_update_recur='ls | parallel "cd {} && git pull"'
-
+#alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+#alias gll='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+alias gl='git l80'
+alias gll='git lg80'
+alias gca='git add . -A; git commit -am'
 # rbenv
 alias re="rbenv"
+
+# rebuild open with menu
+alias rebuild_open_with='/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user'
 
 # clojure
 # alias lein="~/git-repo/dotfiles/lein.sh"
@@ -81,4 +100,25 @@ ccat () {
     exit 1
   fi
   pygmentize -f terminal -g $file
+}
+
+extract () {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
 }
