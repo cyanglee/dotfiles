@@ -31,7 +31,8 @@ __git_files () {
 setopt auto_pushd
 
 # turn off auto correct
-unsetopt correct_all
+# unsetopt correct_all
+unsetopt correct
 
 # Set history options
 HISTSIZE=1000
@@ -41,14 +42,14 @@ HISTTIMEFORMAT='%F %T '
 export PROMPT_COMMAND='history -a'
 
 # java home
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+# export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
 
 # export PATH
 export PATH=/Users/cyanglee/git-repo/dotfiles:$PATH
 export PATH=/Users/cyanglee/bin:$PATH
 
 # Maven
-export M2_HOME=/usr/share/maven
+# export M2_HOME=/usr/share/maven
 export PATH=$M2_HOME/bin:$PATH
 export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
@@ -66,13 +67,47 @@ export GOPATH=~/workspace/go
 # source my alias file
 . ~/repo/dotfiles/aliases
 
+# npm
+export PATH=/usr/local/share/npm/bin:$PATH
+
 # hub
 # eval "$(hub alias -s)"
 
 # torquebox
-export TORQUEBOX_HOME=~/torquebox-2.3.0
-export JBOSS_HOME=$TORQUEBOX_HOME/jboss
-export JRUBY_HOME=$TORQUEBOX_HOME/jruby
-export PATH=$PATH:$JRUBY_HOME/bin
+export JAVA_HOME=`/usr/libexec/java_home`
+# Java 7
+# export JAVA_OPTS="-Xms512m -Xmx4g -XX:MaxPermSize=1g"
+# Java 8
+export JAVA_OPTS="-Xms1g -Xmx4g"
+export TORQUEBOX_HOME=$HOME/.immutant/current
+export JRUBY_HOME="$HOME/.immutant/current/jruby"
+# export JRUBY_OPS="--profile.api"
+# export JRUBY_OPTS=-J-Xmx2048m
+# export LEIN_JVM_OPTS="-Xms2G -Xmx2G"
+export PATH=$PATH:$TORQUEBOX_HOME/jruby/bin
+export JBOSS_HOME="$HOME/.immutant/current/jboss/"
+#rbenv
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
+# andriod
+export PATH=${PATH}:/Users/cyanglee/Downloads/adt-bundle-mac-x86_64-20140321/sdk/platform-tools:/Users/cyanglee/Downloads/adt-bundle-mac-x86_64-20140321/sdk/tools
+
+# rvm
+# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+# for vagrant
+export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
 echo "sourced my zsh custom file"
+
+# for bower
+alias bower='noglob bower'
+
+# tumuxinator
+source ~/.bin/tmuxinator.zsh
+
+# bind UP and DOWN arrow keys
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+

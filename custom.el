@@ -1,7 +1,7 @@
 (setq inhibit-startup-screen t)
 ; set font family and size
-(set-face-attribute 'default nil :font "Consolas" :height 200)
-;(set-default-font "-apple-Consolas-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;(set-face-attribute 'default nil :font "Source Code Pro" :height 200)
+(set-default-font "-apple-Source Code Pro-medium-normal-normal-*-20-*-*-*-m-0-iso10646-1")
 ;(modify-frame-parameters nil '((wait-for-wm . nil)))
 ; set default window size to full screen
 ; (require 'maxframe)
@@ -28,12 +28,12 @@
 (setq org-agenda-skip-scheduled-if-done t)
 ;; mobile org
 ;; Set to the location of your Org files on your local system
-(setq org-directory "~/Dropbox/todo")
+(setq org-directory "/Volumes/storage/Dropbox/todo")
 ;; tag position
 (setq org-tags-column 120)
 
 ;;default folder
-(cd "~/Dropbox/todo")
+(cd "/Volumes/storage/Dropbox/todo")
 
 (setq split-height-threshold 40) ; nil
 (setq split-width-threshold 120) ; 100

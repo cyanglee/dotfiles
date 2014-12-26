@@ -17,6 +17,7 @@ alias bd='bundle'
 alias be='bundle exec'
 alias rdr='rake db:rollback'
 alias zu='zeus'
+alias pp='powder restart; p app;'
 
 # mysql
 alias mysql='/usr/local/mysql/bin/mysql'
@@ -35,6 +36,8 @@ alias tunnel_andover='ssh -N -f -L 3307:localhost:3306 andover'
 # misc
 alias ctags="`brew --prefix`/bin/ctags"
 alias ta="tmux -C attach"
+alias tk="tmux kill-session -t"
+alias ms="mux start "
 alias skype="sudo /Applications/Skype.app/Contents/MacOS/Skype"
 alias zal="v ~/repo/dotfiles/aliases"
 alias tb="torquebox"
@@ -42,7 +45,7 @@ alias tb="torquebox"
 # colored side-by-side diff
 alias diff='colordiff -yW"`tput cols`"'
 # colored less
-alias less='/usr/share/vim/vim73/macros/less.sh'
+alias less='/usr/share/vim/vim73/macros/less.sh +F'
 # edit zsh.before/after file
 alias za='vi ~/repo/dotfiles/after.zsh'
 alias zb='vi ~/repo/dotfiles/before.zsh'
@@ -66,6 +69,9 @@ alias rebuild_open_with='/System/Library/Frameworks/CoreServices.framework/Versi
 
 # clojure
 # alias lein="~/git-repo/dotfiles/lein.sh"
+
+# bower
+alias bower='noglob bower'
 
 # custom functions
 search ()
