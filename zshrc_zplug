@@ -1,19 +1,16 @@
 source ~/.zplug/init.zsh
 
 # General settings
+export VISUAL=vim
+export ENHANCD_FILTER=fzy:fzf:peco
 KEYTIMEOUT=1
 bindkey -v
 
+eval $(thefuck --alias)
+
 # Plugins
-zplug "plugins/git",   from:oh-my-zsh
-zplug "modules/autosuggestions", from:prezto
-zplug "modules/command-not-found", from:prezto
-zplug "modules/completion", from:prezto
-zplug "modules/directory", from:prezto
-zplug "modules/fasd", from:prezto
-zplug "modules/history", from:prezto
-zplug "modules/history-substring-search", from:prezto
-zplug "modules/ssh", from:prezto
+zplug "plugins/vagrant", from:oh-my-zsh
+zplug "b4b4r07/enhancd", use:init.sh
 zplug 'BurntSushi/ripgrep', \
     from:gh-r, \
     as:command, \
@@ -21,22 +18,25 @@ zplug 'BurntSushi/ripgrep', \
 zplug "agkozak/zsh-z"
 zplug "rimraf/k"
 zplug 'wfxr/forgit'
+zplug "modules/prompt", from:prezto
+zplug "modules/autosuggestions", from:prezto
+zplug "modules/command-not-found", from:prezto
+zplug "modules/completion", from:prezto
+zplug "modules/directory", from:prezto
+zplug "modules/fasd", from:prezto
+zplug "modules/history", from:prezto
+zplug "bobthecow/git-flow-completion"
+zplug "zsh-users/zsh-completions"
+zplug "wbinglee/zsh-wakatime", from:github
+zplug "sharkdp/bat", as:command, from:gh-r, rename-to:bat
 zplug "b4b4r07/httpstat", as:command, use:"httpstat.sh", rename-to:httpstat
 zplug "sharkdp/fd", as:command, from:gh-r, rename-to:fd
-zplug "raylee/tldr", as:command, use:"tldr"
-zplug "browsh-org/browsh", as:command, from:gh-r, rename-to:browsh
-zplug "thisredone/rb", as:command, use:"rb"
-zplug "denilsonsa/prettyping", as:command, use:"prettyping"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Interactive filtering
 zplug "peco/peco", as:command, from:gh-r, rename-to:peco
-zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
-zplug "b4b4r07/enhancd", use:"init.sh"
 zplug "b4b4r07/cli-finder", as:command, use:"bin/finder"
-zplug "b4b4r07/easy-oneliner", on:"junegunn/fzf-bin"
-zplug "b4b4r07/git-conflict", as:command, use:"git-conflict"
 zplug "akavel/up", as:command, from:gh-r, rename-to:up
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # powerlevel10k
 # POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs newline)
@@ -45,14 +45,12 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 # POWERLEVEL9K_RBENV_PROMPT_ALWAYS_SHOW='true'
 # POWERLEVEL9K_MODE='nerdfont-complete'
 # POWERLEVEL9K_COLOR_SCHEME="dark"
+# POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 # unsetopt AUTO_NAME_DIRS
 # zplug romkatv/powerlevel10k, as:theme, depth:1
 
-# spaceship
+# Spaceship config
 SPACESHIP_TIME_SHOW=true
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-# zplug mafredri/zsh-async, from:github
-
 
 # Load my settings
 source /Users/take5/.zsh.after/after.zsh
@@ -68,10 +66,7 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load # --verbose
-
-# avn config
-# [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+zplug load #--verbose
 
 # zsh substring search config
 if zplug check zsh-users/zsh-autosuggestions; then
@@ -97,3 +92,8 @@ function fzfp() {
                   rougify {} ||
                   cat {}) 2> /dev/null | head -500'
 }
+
+# not sure why this has to be the last setting
+autoload -U promptinit; promptinit
+prompt spaceship
+
