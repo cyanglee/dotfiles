@@ -1,6 +1,7 @@
 # colored highlighting is awesome
 #alias ls='gls -Fh --color=auto'
 #alias ll='gls -alFh --color=auto'
+alias  ll='ls -hAltpl'
 alias grep='grep --color=auto'
 alias h='history'
 alias l=''
@@ -10,14 +11,16 @@ alias l=''
 alias rr='rake routes'
 # alias rails='_rails_command'
 alias reset_db='rake db:drop;rake db:create;rake db:migrate;rake db:seed;'
-alias p='powder'
 alias rake="noglob rake"
 alias s='rails s'
+alias srs='spring rails s'
 alias bd='bundle'
 alias be='bundle exec'
+alias bid='bundle install --without staging production'
+alias bip='bundle install --without development test'
 alias rdr='rake db:rollback'
-alias zu='zeus'
-alias pp='powder restart; p app;'
+alias rp='RAILS_ENV=production bundle exec rake assets:precompile'
+alias rgm='rails g migration'
 
 # mysql
 alias mysql='/usr/local/mysql/bin/mysql'
@@ -28,16 +31,18 @@ alias mysqldump='/usr/local/mysql/bin/mysqldump'
 
 # editor
 alias st='subl'
-alias v='vi'
+alias v='nvim'
+alias vi='nvim'
 
 # ssh
-alias tunnel_andover='ssh -N -f -L 3307:localhost:3306 andover'
+alias vc='vi ~/.ssh/config'
 
 # misc
 alias ctags="`brew --prefix`/bin/ctags"
-alias ta="tmux -C attach"
+alias ta="tmux attach-session -c"
 alias tk="tmux kill-session -t"
-alias ms="mux start "
+alias tl="tmux list-sessions"
+alias ms="tmuxinator start "
 alias skype="sudo /Applications/Skype.app/Contents/MacOS/Skype"
 alias zal="v ~/repo/dotfiles/aliases"
 alias tb="torquebox"
@@ -49,7 +54,7 @@ alias less='/usr/share/vim/vim73/macros/less.sh +F'
 # edit zsh.before/after file
 alias za='vi ~/repo/dotfiles/after.zsh'
 alias zb='vi ~/repo/dotfiles/before.zsh'
-alias zaa='vi ~/repo/dotfiles/aliases' 
+alias zaa='vi ~/repo/dotfiles/aliases'
 
 # check the svn ignore list
 alias svn_ignore='svn status | grep "^\?" | awk "{print \$2}"'
@@ -58,9 +63,11 @@ alias svn_ignore='svn status | grep "^\?" | awk "{print \$2}"'
 alias git_update_recur='ls | parallel "cd {} && git pull"'
 #alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 #alias gll='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
-alias gl='git l80'
-alias gll='git lg80'
+# alias gl='git l80'
+# alias gll='git lg80'
 alias gca='git add . -A; git commit -am'
+alias gffs='git flow feature start '
+alias gfff='git flow feature finish '
 # rbenv
 alias re="rbenv"
 
@@ -72,6 +79,13 @@ alias rebuild_open_with='/System/Library/Frameworks/CoreServices.framework/Versi
 
 # bower
 alias bower='noglob bower'
+
+# mina
+alias mpd='mina production deploy'
+alias msd='mina staging deploy'
+
+# heroku
+alias hep='git push heroku master'
 
 # custom functions
 search ()
@@ -127,4 +141,14 @@ extract () {
      else
          echo "'$1' is not a valid file"
      fi
+}
+
+fzfp () {
+  fzf --preview '[[ $(file --mime {}) =~ binary ]] &&
+                  echo {} is a binary file ||
+                  (bat --style=numbers --color=always {} ||
+                    highlight -O ansi -l {} ||
+                    coderay {} ||
+                    rougify {} ||
+                    cat {}) 2> /dev/null | head -500'
 }

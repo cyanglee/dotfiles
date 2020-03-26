@@ -41,6 +41,10 @@ HISTTIMEFORMAT='%F %T '
 # Sync history file
 export PROMPT_COMMAND='history -a'
 
+# Set locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # java home
 # export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
 
@@ -60,12 +64,10 @@ function server() {
   python -m SimpleHTTPServer "$port"
 }
 
-# add bin path created by 'bundle install --binstubs' for rails projects
-export PATH=./bin:$PATH
 # go path
 export GOPATH=~/workspace/go
 # source my alias file
-. ~/repo/dotfiles/aliases
+. ~/workspace/dotfiles/aliases
 
 # npm
 export PATH=/usr/local/share/npm/bin:$PATH
@@ -86,9 +88,11 @@ export JRUBY_HOME="$HOME/.immutant/current/jruby"
 # export LEIN_JVM_OPTS="-Xms2G -Xmx2G"
 export PATH=$PATH:$TORQUEBOX_HOME/jruby/bin
 export JBOSS_HOME="$HOME/.immutant/current/jboss/"
+
 #rbenv
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH=./bin:$PATH
 
 # andriod
 export PATH=${PATH}:/Users/cyanglee/Downloads/adt-bundle-mac-x86_64-20140321/sdk/platform-tools:/Users/cyanglee/Downloads/adt-bundle-mac-x86_64-20140321/sdk/tools
@@ -111,3 +115,13 @@ source ~/.bin/tmuxinator.zsh
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+# aws
+export EC2_HOME=/usr/local/ec2/ec2-api-tools-1.7.4.0
+export PATH=~/.local/lib/aws/bin:${PATH}:$EC2_HOME/bin
+export AWS_ACCESS_KEY=AKIAIEQ3OUAKG6QJ4ZCQ
+export AWS_SECRET_KEY=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
+source /usr/local/share/zsh/site-functions/_aws
+
+# eval "$(jenv init -)"
+# imagemagick
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"

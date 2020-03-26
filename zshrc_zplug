@@ -1,0 +1,99 @@
+source ~/.zplug/init.zsh
+
+# General settings
+KEYTIMEOUT=1
+bindkey -v
+
+# Plugins
+zplug "plugins/git",   from:oh-my-zsh
+zplug "modules/autosuggestions", from:prezto
+zplug "modules/command-not-found", from:prezto
+zplug "modules/completion", from:prezto
+zplug "modules/directory", from:prezto
+zplug "modules/fasd", from:prezto
+zplug "modules/history", from:prezto
+zplug "modules/history-substring-search", from:prezto
+zplug "modules/ssh", from:prezto
+zplug 'BurntSushi/ripgrep', \
+    from:gh-r, \
+    as:command, \
+    rename-to:"rg"
+zplug "agkozak/zsh-z"
+zplug "rimraf/k"
+zplug 'wfxr/forgit'
+zplug "b4b4r07/httpstat", as:command, use:"httpstat.sh", rename-to:httpstat
+zplug "sharkdp/fd", as:command, from:gh-r, rename-to:fd
+zplug "raylee/tldr", as:command, use:"tldr"
+zplug "browsh-org/browsh", as:command, from:gh-r, rename-to:browsh
+zplug "thisredone/rb", as:command, use:"rb"
+zplug "denilsonsa/prettyping", as:command, use:"prettyping"
+
+# Interactive filtering
+zplug "peco/peco", as:command, from:gh-r, rename-to:peco
+zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
+zplug "b4b4r07/enhancd", use:"init.sh"
+zplug "b4b4r07/cli-finder", as:command, use:"bin/finder"
+zplug "b4b4r07/easy-oneliner", on:"junegunn/fzf-bin"
+zplug "b4b4r07/git-conflict", as:command, use:"git-conflict"
+zplug "akavel/up", as:command, from:gh-r, rename-to:up
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+# powerlevel10k
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs newline)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status rbenv time)
+# POWERLEVEL9K_RBENV_ALWAYS='true'
+# POWERLEVEL9K_RBENV_PROMPT_ALWAYS_SHOW='true'
+# POWERLEVEL9K_MODE='nerdfont-complete'
+# POWERLEVEL9K_COLOR_SCHEME="dark"
+# unsetopt AUTO_NAME_DIRS
+# zplug romkatv/powerlevel10k, as:theme, depth:1
+
+# spaceship
+SPACESHIP_TIME_SHOW=true
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+# zplug mafredri/zsh-async, from:github
+
+
+# Load my settings
+source /Users/take5/.zsh.after/after.zsh
+source /Users/take5/.yadr/zsh/key-bindings.zsh
+source /Users/take5/.yadr/zsh/aliases.zsh
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load # --verbose
+
+# avn config
+# [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+
+# zsh substring search config
+if zplug check zsh-users/zsh-autosuggestions; then
+    ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down)
+    ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}")
+fi
+
+if zplug check zsh-users/zsh-history-substring-search; then
+    bindkey '\eOA' history-substring-search-up
+    bindkey '\eOB' history-substring-search-down
+fi
+#####
+
+# fzf config
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+function fzfp() {
+    fzf --preview '[[ $(file --mime {}) =~ binary ]] &&
+                 echo {} is a binary file ||
+                 (bat --style=numbers --color=always {} ||
+                  highlight -O ansi -l {} ||
+                  coderay {} ||
+                  rougify {} ||
+                  cat {}) 2> /dev/null | head -500'
+}
