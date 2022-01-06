@@ -68,6 +68,7 @@ alias git_update_recur='ls | parallel "cd {} && git pull"'
 alias gca='git add . -A; git commit -am'
 alias gffs='git flow feature start '
 alias gfff='git flow feature finish '
+alias gitb='git branch --show-current | pbcopy'
 # rbenv
 alias re="rbenv"
 
@@ -84,8 +85,23 @@ alias bower='noglob bower'
 alias mpd='mina production deploy'
 alias msd='mina staging deploy'
 
+# capistrano
+# Deploy current branch to staging
+alias capdstg='branch="$(git branch --show-current)" bundle exec cap staging deploy'
+# Deploy current branch to production
+alias capdprd='branch="$(git branch --show-current)" bundle exec cap production deploy'
+
+# Mina
+# Deploy current branch to staging
+alias minadstg='branch="$(git branch --show-current)" mina staging deploy'
+# Deploy current branch to production
+alias minadprd='branch="$(git branch --show-current)" mina production deploy'
+
 # heroku
 alias hep='git push heroku master'
+
+# exa (better ls alternative)
+alias e="exa -lahF --git"
 
 # custom functions
 search ()
