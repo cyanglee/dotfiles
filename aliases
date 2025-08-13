@@ -1,18 +1,57 @@
-# colored highlighting is awesome
-#alias ls='gls -Fh --color=auto'
-#alias ll='gls -alFh --color=auto'
-alias  ll='ls -hAltpl'
+# ================================================
+# COMMON BASH ALIASES AND UTILITIES
+# ================================================
+
+# Basic navigation improvements
+alias ll='ls -hAltpl'
 alias grep='grep --color=auto'
 alias h='history'
-alias l=''
+alias g='git'
+alias rm="rm -i"  # Safety measure: ask before removing
 
-# ruby / rails
-# alias rs='unicorn_rails -p 3000'
-alias rr='rake routes'
-# alias rails='_rails_command'
+# Use eza (improved ls) if available
+if command -v eza &> /dev/null
+then
+  alias ls='eza -a'
+  alias lsa='eza -alFh'
+  alias e="eza -lahF --git"
+fi
+
+# Editor shortcuts
+alias st='subl'
+alias v='nvim'
+alias vi='nvim'
+
+# Color enhancements
+alias diff='colordiff -yW"`tput cols`"'  # colored side-by-side diff
+alias less='/usr/share/vim/vim73/macros/less.sh +F'  # colored less
+
+# ================================================
+# VERSION CONTROL - GIT & SVN
+# ================================================
+
+# Git shortcuts
+#alias gl='git l80'
+#alias gll='git lg80'
+alias gca='git add . -A; git commit -am'
+alias gffs='git flow feature start '
+alias gfff='git flow feature finish '
+alias gitb='git branch --show-current | pbcopy'
+alias git_update_recur='ls | parallel "cd {} && git pull"'
+
+# SVN utilities
+alias svn_ignore='svn status | grep "^\?" | awk "{print \$2}"'
+
+# ================================================
+# DEVELOPMENT TOOLS
+# ================================================
+
+# Ruby/Rails
+alias rr='rails routes'
 alias reset_db='rake db:drop;rake db:create;rake db:migrate;rake db:seed;'
 alias rake="noglob rake"
 alias s='rails s'
+alias c='rails c'
 alias srs='spring rails s'
 alias bd='bundle'
 alias be='bundle exec'
@@ -21,150 +60,86 @@ alias bip='bundle install --without development test'
 alias rdr='rake db:rollback'
 alias rp='RAILS_ENV=production bundle exec rake assets:precompile'
 alias rgm='rails g migration'
+alias rdm='bin/rake db:migrate'
 
-# mysql
+# rbenv
+alias re="rbenv"
+
+# Bower
+alias bower='noglob bower'
+
+# Database
+# MySQL
 alias mysql='/usr/local/mysql/bin/mysql'
 alias mysqldump='/usr/local/mysql/bin/mysqldump'
 
-# postgresql
+# PostgreSQL
 # pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 
-# editor
-alias st='subl'
-alias v='nvim'
-alias vi='nvim'
+# ================================================
+# DEPLOYMENT & SERVERS
+# ================================================
 
-# ssh
-alias vc='vi ~/.ssh/config'
+# Capistrano
+alias csd='branch="$(git branch --show-current)" bundle exec cap staging deploy'
+alias cpd='branch="$(git branch --show-current)" bundle exec cap production deploy'
 
-# misc
-alias ctags="`brew --prefix`/bin/ctags"
+# Mina
+alias msd='branch="$(git branch --show-current)" bundle exec mina staging deploy force_asset_precompile=true'
+alias msdr='branch="$(git branch --show-current)" bundle exec mina staging deploy;mina staging rebuild_assets'
+alias mpd='branch="$(git branch --show-current)" mina production deploy force_asset_precompile=true'
+
+# Heroku
+alias hep='git push heroku master'
+
+# ================================================
+# SYSTEM & UTILITIES
+# ================================================
+
+# Tmux
 alias ta="tmux attach-session -c"
 alias tk="tmux kill-session -t"
+alias tks="tmux kill-server"
 alias tl="tmux list-sessions"
 alias ms="tmuxinator start "
-alias skype="sudo /Applications/Skype.app/Contents/MacOS/Skype"
-alias zal="v ~/repo/dotfiles/aliases"
-alias tb="torquebox"
 
-# colored side-by-side diff
-alias diff='colordiff -yW"`tput cols`"'
-# colored less
-alias less='/usr/share/vim/vim73/macros/less.sh +F'
-# edit zsh.before/after file
+# Homebrew
+alias ctags="`brew --prefix`/bin/ctags"
+#alias brew="HOMEBREW_NO_AUTO_UPDATE=1 brew"
+
+# System utilities
+alias rebuild_open_with='/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user'
+alias skype="sudo /Applications/Skype.app/Contents/MacOS/Skype"
+
+# ================================================
+# CONFIGURATION SHORTCUTS
+# ================================================
+
+# Edit dotfiles
+alias zal="v ~/repo/dotfiles/aliases"
 alias za='vi ~/repo/dotfiles/after.zsh'
 alias zb='vi ~/repo/dotfiles/before.zsh'
 alias zaa='vi ~/repo/dotfiles/aliases'
 
-# check the svn ignore list
-alias svn_ignore='svn status | grep "^\?" | awk "{print \$2}"'
+# ================================================
+# MISCELLANEOUS
+# ================================================
 
-# git
-alias git_update_recur='ls | parallel "cd {} && git pull"'
+alias tigl='last_month_start=$(date -v1d -v-1m +%Y-%m-%d) && last_month_end=$(date -v1d -v-1d +%Y-%m-%d) && tig --since="$last_month_start" --until="$last_month_end" --all'
+
+# ================================================
+# COMMENTED OUT OR LEGACY ALIASES
+# ================================================
+
+# Uncomment if needed:
+#alias ls='gls -Fh --color=auto'
+#alias ll='gls -alFh --color=auto'
+#alias l=''
+#alias rs='unicorn_rails -p 3000'
+#alias rails='_rails_command'
+#alias vc='vi ~/.ssh/config'
 #alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 #alias gll='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
-# alias gl='git l80'
-# alias gll='git lg80'
-alias gca='git add . -A; git commit -am'
-alias gffs='git flow feature start '
-alias gfff='git flow feature finish '
-alias gitb='git branch --show-current | pbcopy'
-# rbenv
-alias re="rbenv"
-
-# rebuild open with menu
-alias rebuild_open_with='/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user'
-
-# clojure
-# alias lein="~/git-repo/dotfiles/lein.sh"
-
-# bower
-alias bower='noglob bower'
-
-# mina
-alias mpd='mina production deploy'
-alias msd='mina staging deploy'
-
-# capistrano
-# Deploy current branch to staging
-alias capdstg='branch="$(git branch --show-current)" bundle exec cap staging deploy'
-# Deploy current branch to production
-alias capdprd='branch="$(git branch --show-current)" bundle exec cap production deploy'
-
-# Mina
-# Deploy current branch to staging
-alias minadstg='branch="$(git branch --show-current)" mina staging deploy'
-# Deploy current branch to production
-alias minadprd='branch="$(git branch --show-current)" mina production deploy'
-
-# heroku
-alias hep='git push heroku master'
-
-# exa (better ls alternative)
-alias e="exa -lahF --git"
-
-# custom functions
-search ()
-{
-    if [ $# -ne 1 ]; then
-        echo "please specify the file name to search";
-        exit 0;
-    else
-        # echo "Matching file found: --> ";
-        find . -name "$1" | awk '{print "Matching file found: --> " $1}'
-    fi
-}
-
-findkinf ()
-{
-    find . -type f -exec grep -l "$1" {} \;
-}
-
-listkinf ()
-{
-    find . -type f -exec grep -ln "$1" {} \;
-}
-
-ccat () {
-  if [ ! -t 0 ];then
-    file=/dev/stdin
-  elif [ -f $1 ];then
-    file=$1
-  else
-    echo "Usage: $0 code.c"
-    echo "or e.g. head code.c|$0"
-    exit 1
-  fi
-  pygmentize -f terminal -g $file
-}
-
-extract () {
-    if [ -f $1 ] ; then
-      case $1 in
-        *.tar.bz2)   tar xjf $1     ;;
-        *.tar.gz)    tar xzf $1     ;;
-        *.bz2)       bunzip2 $1     ;;
-        *.rar)       unrar e $1     ;;
-        *.gz)        gunzip $1      ;;
-        *.tar)       tar xf $1      ;;
-        *.tbz2)      tar xjf $1     ;;
-        *.tgz)       tar xzf $1     ;;
-        *.zip)       unzip $1       ;;
-        *.Z)         uncompress $1  ;;
-        *.7z)        7z x $1        ;;
-        *)     echo "'$1' cannot be extracted via extract()" ;;
-         esac
-     else
-         echo "'$1' is not a valid file"
-     fi
-}
-
-fzfp () {
-  fzf --preview '[[ $(file --mime {}) =~ binary ]] &&
-                  echo {} is a binary file ||
-                  (bat --style=numbers --color=always {} ||
-                    highlight -O ansi -l {} ||
-                    coderay {} ||
-                    rougify {} ||
-                    cat {}) 2> /dev/null | head -500'
-}
+#alias lein="~/git-repo/dotfiles/lein.sh"
+#alias mpd='mina production deploy'
+#alias msd='mina staging deploy'
